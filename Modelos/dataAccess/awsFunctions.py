@@ -4,7 +4,7 @@ from botocore.exceptions import ClientError
 import pandas as pd
 
 
-def aws_credentials(rol="dataScience", account_id="254565021826"):
+def aws_credentials(rol="dataScience", account_id="************"):
     """
     Funcion que devuelve las credenciales de un usuario temporal con el rol definido. Es necesario
     que el usuario que llama a la función tenga permisos para obtener dicho rol.
