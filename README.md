@@ -9,9 +9,13 @@ Queda dividido en cinco partes:
 ## 1. Recolección de datos
 
 Este repositorio recoge los scripts utilizados para la recolección de datos de las siguientes fuentes:
+
 	- Idealista API
+	
 	- Idealista WEB
+	
 	- MiCole WEB
+	
 	- Places API (Google Maps Platform)
 
 ## 2. Depuración de datos
