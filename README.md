@@ -28,6 +28,6 @@ El repositorio contiene operaciones de transformación de los datos obtenidos (r
 
 ## 4. Series temporales
 
-En este apartado, único programado en R, se ajusta un modelo de series temporales a cada serie de precios medios por metro cuadrado de los distritos del municipio de Madrid (además de a la serie correspondiente al municipio de Madrid en conjunto).
+En este apartado, el único programado en R, se ajusta un modelo de series temporales a cada serie de precios medios por metro cuadrado de los distritos del municipio de Madrid (además de a la serie correspondiente al municipio de Madrid en conjunto).
 
 ## 5. WEB
