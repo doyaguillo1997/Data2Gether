@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+psycopg2-binary = "*"
+requests = "*"
+geojson = "*"
+colour = "*"
+pandas = "*"
+gunicorn = "*"
+sklearn = "*"
+
+[dev-packages]
+isort = "*"
+flake8 = "*"
+black = "==20.8b1"
+mypy = "*"
+pytest = "*"
+ipython = "*"
+ipdb = "*"
+coverage = "*"
+django-stubs = "*"
+
+[requires]
+python_version = "3.8"

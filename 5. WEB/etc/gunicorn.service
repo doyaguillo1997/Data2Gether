@@ -1,0 +1,25 @@
+# https://docs.gunicorn.org/en/stable/deploy.html#systemd
+
+[Unit]
+Description=data2gether gunircorn service
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+Type=notify
+# the specific user that our service will run as
+User=ubuntu
+Group=ubuntu
+Environment="PYTHONPATH=/home/ubuntu/data2gether/app:/home/ubuntu/data2gether/app/main"
+# another option for an even more restricted service is
+# DynamicUser=yes
+# see http://0pointer.net/blog/dynamic-users-with-systemd.html
+RuntimeDirectory=gunicorn
+WorkingDirectory=/home/ubuntu/data2gether
+ExecStart=/home/ubuntu/.local/share/virtualenvs/data2gether-VxGXoczE/bin/gunicorn app.main.wsgi --access-logfile=- --error-logfile=- --timeout=600 --workers=1 --threads=4
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+[Install]
+WantedBy=multi-user.target
