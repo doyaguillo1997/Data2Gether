@@ -32,4 +32,4 @@ En este apartado, el único programado en R, se ajusta un modelo de series tempo
 
 ## 5. WEB
 
-Contiene el código de la aplicación WEB. Como se ha comentado en la memoría es una aplicación hecha en Django. Este repositorio contiene tanto front como back, asi cmo ficheros de despligue, de configuración de entorno y los paquetes creados durante el pipeline del modelo.
+Contiene el código de la aplicación WEB. Como se ha comentado en la memoria, es una aplicación hecha en Django. Este repositorio contiene tanto front como back, así como ficheros de despligue, de configuración de entorno y los paquetes creados durante el pipeline del modelo.
