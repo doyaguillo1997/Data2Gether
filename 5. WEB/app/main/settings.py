@@ -21,7 +21,7 @@ MAIN_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "dma#ja2fmaz+8c*u9=+2x0d+4k51v58l*g9d#z52=pf!-8i*^e"
+SECRET_KEY = ""
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -96,11 +96,11 @@ SERIALIZATION_MODULES = {
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": "data2gether",
+        "NAME":"",
         "HOST": "localhost",
-        "PORT": "5432",
-        "USER": "data2gether",
-        "PASSWORD": "data2gether",
+        "PORT": "",
+        "USER": "",
+        "PASSWORD": "",
     },
 }
 
