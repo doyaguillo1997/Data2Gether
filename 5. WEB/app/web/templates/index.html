@@ -1,0 +1,260 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 id="walletName" class="h2 text-white d-inline-block mb-0"></h6>
+            </div>
+            <div class="col-lg-6 col-5 text-right" o>
+              <select id="selectWallet" class="btn btn-secondary btn-neutral" onchange="resetWalletDashboard(event)"></select>
+            </div>
+          </div>
+        <!-- Card stats -->
+          <div class="row">
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Número viviendas</h5>
+                      <span class="h2 font-weight-bold mb-0" id="countPropertiesWallet"></span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="ni ni-shop"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Valor de compra</h5>
+                        <span class="h2 font-weight-bold mb-0" id="priceWalletBuyed"></span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                        <i class="ni ni-money-coins"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Valor estimado</h5>
+                      <span class="h2 font-weight-bold mb-0" id="priceWalletEstimated"></span>                  
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="ni ni-money-coins"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Rentabilidad estimada</h5>
+                      <span class="h2 font-weight-bold mb-0" id="totalCostEffectiveness"></span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="fas fa-percent"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card border-0">
+            <div id="map" class="map-canvas" style="height: 600px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card bg-default">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 id="headerEvolutionWalletChart" class="text-light text-uppercase ls-1 mb-1"></h6>
+                  <h5 class="h3 text-white mb-0">Evolución de la cartera</h5>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div id="container-evolutionWalletChart" class="chart">
+                <!-- Chart wrapper -->
+                <canvas id="evolutionWalletChart" class="chart-canvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header border-0">
+              <h3 class="mb-0">Resumen Barrios</h3>
+            </div>
+            <!-- Light table -->
+            <div class="table-responsive">
+              <table class="table align-items-center" id='neigborhoodWalletResume'>
+                <thead class="thead-light">
+                  <tr>
+                    <th class="sort" style="cursor:pointer;">Nombre</th>
+                    <th class="sort" style="cursor:pointer;">Viviendas</th>
+                    <th class="sort" style="cursor:pointer;">Invertido</th>
+                    <th class="sort" style="cursor:pointer;">Estimado</th>
+                    <th class="sort" style="cursor:pointer;">Rentabilidad</th>
+                  </tr>
+                </thead>
+                <tbody class="list">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card bg-default">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 id="header-neigborhoodWalletResumeChart" class="text-light text-uppercase ls-1 mb-1"></h6>
+                  <h5 class="h3 text-white mb-0">Resumen Barrios</h5>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div id="container-neigborhoodWalletResumeChart" class="chart">
+                <!-- Chart wrapper -->
+                <canvas id="neigborhoodWalletResumeChart" class="chart-canvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header border-0">
+              <h3 class="mb-0">Resumen Distritos</h3>
+            </div>
+            <!-- Light table -->
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush" id='districtWalletResume'>
+                <thead class="thead-light">
+                  <tr>
+                    <th class="sort" style="cursor:pointer;">Nombre</th>
+                    <th class="sort" style="cursor:pointer;">Viviendas</th>
+                    <th class="sort" style="cursor:pointer;">Invertido</th>
+                    <th class="sort" style="cursor:pointer;">Estimado</th>
+                    <th class="sort" style="cursor:pointer;">Rentabilidad</th>
+                  </tr>
+                </thead>
+                <tbody class="list">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card bg-default">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 id="headerDistrictWalletResumeChart" class="text-light text-uppercase ls-1 mb-1"></h6>
+                  <h5 class="h3 text-white mb-0">Resumen Distritos</h5>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div id="container-districtWalletResumeChart" class="chart">
+                <!-- Chart wrapper -->
+                <canvas id="districtWalletResumeChart" class="chart-canvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header border-0">
+              <h3 class="mb-0">Resumen por propiedad</h3>
+            </div>
+            <!-- Light table -->
+            <div class="table-responsive">
+              <table class="table align-items-center" id='propertiesWalletResume'>
+                <thead class="thead-light">
+                  <tr>
+                    <th class="sort" style="cursor:pointer;">RC</th>
+                    <th class="sort" style="cursor:pointer;">Superficie</th>
+                    <th class="sort" style="cursor:pointer;">Año</th>
+                    <th class="sort" style="cursor:pointer;">Inversión</th>
+                    <th class="sort" style="cursor:pointer;">Estimado</th>
+                    <th class="sort" style="cursor:pointer;">Rentabilidad</th>
+                    <th class="sort" style="cursor:pointer;">Mejor momento</th>
+                    <th class="sort" style="cursor:pointer;">Estimación máx.</th>
+                    <th class="sort" style="cursor:pointer;">Rentabilidad máx.</th>
+                  </tr>
+                </thead>
+                <tbody class="list">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_l4z6N45xZg16gHRsy0V8Vw0ajCrBglo&callback=getAndSetWallet&libraries=&v=weekly" async></script>
+
+  <script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+{% endblock javascripts %}

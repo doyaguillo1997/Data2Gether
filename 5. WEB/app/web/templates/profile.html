@@ -1,0 +1,183 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Profile {% endblock title %}
+
+{% block content %}
+
+<div class="header bg-primary pb-6">
+  <!-- Mask -->
+  <!-- <span class="mask bg-gradient-default opacity-8"></span> -->
+  <!-- Header container -->
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-12 col-12">
+          <h1 id="profile-name" class="display-2 text-white"></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-4 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Carteras</h5>
+                  <span class="h2 font-weight-bold mb-0" id="profile-wallet"></span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                    <i class="ni ni-archive-2"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Viviendas</h5>
+                    <span class="h2 font-weight-bold mb-0" id="profile-properties"></span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                    <i class="ni ni-shop"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Media de viviendas por cartera</h5>
+                  <span class="h2 font-weight-bold mb-0" id="profile-properties-avg"></span>                  
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                    <i class="ni ni-shop"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <!-- Card header -->
+        <div class="card-header border-0">
+          <h3 class="mb-0">Carteras</h3>
+        </div>
+        <!-- Light table -->
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="sort" data-sort="name">Nombre</th>
+                <th scope="col" class="sort" data-sort="budget">Fecha</th>
+                <th scope="col" class="sort" data-sort="status">Viviendas</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody class="list" id="profile-table-load">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-load-modal">
+  Nueva Cartera
+  </button>
+<div class="modal fade" id="new-load-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nueva Cartera</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <form role="form"  enctype="multipart/form-data" action="/create_load/" id="new-load" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+              <div class="input-group input-group-merge input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-tag"></i></span>
+                </div>
+                <input class="form-control" name="name" placeholder="Nombre de la cartera" type="text">
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-merge input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-vector"></i></span>
+                </div>
+                <input class="form-control" name="external_id" placeholder="Nombre de la columna ID" type="text">
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-merge input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-vector"></i></span>
+                </div>
+                <input class="form-control" name="rc" placeholder="Nombre de la columna RC" type="text">
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-merge input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-vector"></i></span>
+                </div>
+                <input class="form-control" name="buyed_price" placeholder="Nombre de la columna precio de compra" type="text">
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-merge input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-archive-2"></i></span>
+                </div>
+                <input class="form-control" name="file" style="cursor:pointer" type="file" accept=".csv">
+              </div>
+            </div>
+            <input class="form-control" name="account" type="int" value="2" hidden>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary" form="new-load">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  {% comment %} {% include "includes/footer.html" %} {% endcomment %}
+
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+  <script>
+    window.onload = function() { getAndSetProfileData(2); }
+  </script>
+{% endblock javascripts %}

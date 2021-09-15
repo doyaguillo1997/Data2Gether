@@ -1,0 +1,142 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Maps {% endblock title %}
+
+{% block content %}
+
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 id="parentName" class="h2 text-white d-inline-block mb-0"></h6>
+            </div>
+            <div class="col-lg-6 col-5 text-right" o>
+              <p id="seeMuncipality" class="btn btn-secondary btn-neutral" onclick="getAndSetMapData(1)" hidden>Ver distritos</p>
+            </div>
+          </div>
+        <!-- Card stats -->
+          <div class="row">
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Precio actual m<sup>2</sup></h5>
+                      <span class="h2 font-weight-bold mb-0" id="actualPrice"></span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="ni ni-money-coins"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Variación mensual</h5>
+                        <span class="h2 font-weight-bold mb-0" id="monthlyVariation"></span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                        <i class="fas fa-percent"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Variación trimestral</h5>
+                      <span class="h2 font-weight-bold mb-0" id="quarterlyVariation"></span>                  
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="fas fa-percent"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Variación anual</h5>
+                      <span class="h2 font-weight-bold mb-0" id="annualVariation"></span> 
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                        <i class="fas fa-percent"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card bg-default">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 id="headerHistoricSales" class="text-light text-uppercase ls-1 mb-1"></h6>
+                  <h5 class="h3 text-white mb-0">Historico precio M<sup>2</sup></h5>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div id="container-chart-historic-dark" class="chart">
+                <!-- Chart wrapper -->
+                <canvas id="chart-historic-dark" class="chart-canvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card border-0">
+            <div id="map" class="map-canvas" style="height: 600px;"></div>
+          </div>
+        </div>
+      </div>
+
+      {% comment %} {% include "includes/footer.html" %} {% endcomment %}
+      
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_l4z6N45xZg16gHRsy0V8Vw0ajCrBglo&callback=initMap&libraries=&v=weekly" async></script>
+
+  <script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

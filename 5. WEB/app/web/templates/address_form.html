@@ -1,0 +1,133 @@
+<!--
+=========================================================
+* Argon Dashboard - v1.2.0
+=========================================================
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
+
+
+* Copyright  Creative Tim (http://www.creative-tim.com)
+* Coded by www.creative-tim.com
+
+
+
+=========================================================
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="canonical" href="https://appseed.us/admin-dashboards/django-dashboard-argon">
+  
+  <title>
+    Data2gether - {% block title %} {% endblock %}
+  </title>
+
+  <!-- Favicon - loaded as static -->
+  <link rel="icon" href="/static/assets/img/brand/favicon.png" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="/static/assets/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="/static/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+
+  <!-- JS Charts -->
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="/static/assets/css/argon.css?v=1.2.0" type="text/css">
+
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %} {% endblock stylesheets %}
+
+</head>
+
+<body class="bg-primary">
+
+  <div class="main-content" id="panel">
+
+    {% block content %}
+        <div class="container-fluid mt-6">
+            <div class="row mb-3">
+                <img src="/static/assets/img/brand/blue.png" class="rounded mx-auto d-block" alt="Argon Design - Jinja Template Logo." style="width:300px;height:100px">
+            </div>
+            <form role="form"  enctype="multipart/form-data" action="/estimate_property/" id="new-load" method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <div class="form-group mb-3">
+                        <div class="input-group input-group-merge input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"></span>
+                        </div>
+                        <input autocomplete="off" class="form-control" id="tags" placeholder="Calle" type="text">
+                        <input class="form-control" id="road" name="road" type="int" hidden>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="input-group input-group-merge input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"></span>
+                        </div>
+                        <input class="form-control" name="number" placeholder="Número" type="text">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col mb-3">
+                            <div class="input-group input-group-merge input-group-alternative">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"></span>
+                            </div>
+                            <input class="form-control" name="block" placeholder="Bloque" type="text">
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="input-group input-group-merge input-group-alternative">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"></span>
+                            </div>
+                            <input class="form-control" name="stairs" placeholder="Escalera" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col mb-3">
+                            <div class="input-group input-group-merge input-group-alternative">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"></span>
+                            </div>
+                            <input class="form-control" name="floor" placeholder="Planta" type="text">
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="input-group input-group-merge input-group-alternative">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"></span>
+                            </div>
+                            <input class="form-control" name="door" placeholder="Puerta" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-secondary col-xl-12" data-dismiss="modal">Valorar</button>
+            </form>
+        </div>
+    {% endblock content %}
+
+  </div>
+
+  {% include "includes/scripts.html" %}
+
+  <!-- Specific JS goes HERE --> 
+  {% block javascripts %}
+    <script src="/static/assets/js/argon.js?v=1.2.0"></script>
+    <script> 
+        // var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre & Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts & Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
+        window.onload = function() { autocomplete(document.getElementById("tags"), JSON.parse("{{roads|escapejs}}")); }
+    </script>
+  {% endblock javascripts %}
+</body>
+
+</html>
