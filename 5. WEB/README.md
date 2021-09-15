@@ -82,20 +82,6 @@ Entrar en http://locahost:8000/
 
 Siturse en la carpeta App
 
-## Load CSV
-
-Permite cargar un CSV en nuestra base de datos. Este CSV debe estar en la carpeta csv_files
-
-```
-python manage.py load_csv id_cliente nombre_fichero mapper
-```
-
-El mapper es un json. El formato debe ser el json entre comillas. Las comillas interiores deben estar con contrabarra
-
-```
-./manage.py load_csv 2 cartera_Madrid_Provincia.csv "{\"external_id\":\"IdUnico\", \"RC\":\"ReferenciaCatastral\"}"
-```
-
 ## Load Cadastre
 
 Carga la informacion catastral sobre las viviendas de una cartera
